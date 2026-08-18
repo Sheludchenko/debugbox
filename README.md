@@ -19,6 +19,14 @@ docker build -t ghcr.io/sheludchenko/debugbox:latest .
 kubectl run debugbox --rm -it --image=ghcr.io/sheludchenko/debugbox:latest --restart=Never -- /bin/bash
 ```
 
+Schedule on a specific node, including tainted ones:
+
+```bash
+kubectl run debugbox --rm -it --image=ghcr.io/sheludchenko/debugbox:latest --restart=Never \
+  --overrides='{"spec":{"nodeSelector":{"kubernetes.io/hostname":"NODE"},"tolerations":[{"operator":"Exists"}]}}' \
+  -- /bin/bash
+```
+
 ## Tools
 
 
